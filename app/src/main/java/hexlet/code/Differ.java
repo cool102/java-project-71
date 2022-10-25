@@ -12,6 +12,9 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
 
+/**
+ *
+ */
 public class Differ {
     public static String generate(String filePath1, String filePath2) throws Exception {
 
@@ -45,8 +48,10 @@ public class Differ {
         Set<String> keys1 = map1.keySet();
         Set<String> keys2 = map2.keySet();
         Set<String> allKeys = new TreeSet<>();
+
         allKeys.addAll(keys1);
         allKeys.addAll(keys2);
+
         StringBuilder result = new StringBuilder("{\n");
         for (String key : allKeys) {
             if (map2.containsKey(key)) {
@@ -62,7 +67,7 @@ public class Differ {
                         & Objects.nonNull(value2)) { // добавляем изменения
                     result.append(" - " + key + ": ");
                     result.append(value1 + "\n");
-                    result.append(" - " + key + ": ");
+                    result.append(" + " + key + ": ");
                     result.append(value2 + "\n");
                 }
             }
