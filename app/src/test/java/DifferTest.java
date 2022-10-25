@@ -1,11 +1,11 @@
 import hexlet.code.Differ;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class DifferTest {
 
@@ -36,11 +36,13 @@ public class DifferTest {
         String file1Name = "\\NonExistFile1.json";
         String file2Name = "\\NonExistFile2.json";
         Exception exception = assertThrows(Exception.class, () -> {
-            Differ.generate(absolutePath + file1Name, absolutePath + file2Name);
+            Differ.generate(absolutePath + file1Name,
+                    absolutePath + file2Name);
         });
-        String expectedMessage = "File 'D:\\devel\\java-project-71\\app\\src\\test\\resources\\NonExistFile1.json' does not exist";
+        String expectedMessage = "File 'D:\\devel\\java-project-71\\app\\src\\"
+                + "test\\resources\\NonExistFile1.json' does not exist";
         String actualMessage = exception.getMessage();
-        assertEquals(expectedMessage,actualMessage);
+        assertEquals(expectedMessage, actualMessage);
 
     }
 
@@ -61,7 +63,7 @@ public class DifferTest {
                 + " -surname:Unmarried\n"
                 + " +surname:Married}";
         String expected = dirtyExpected.trim().replace(" ", "").replace("\n", "");
-        Assertions.assertEquals(expected, result);
+        assertEquals(expected, result);
     }
 
     /**
@@ -76,7 +78,7 @@ public class DifferTest {
         String result = dirtyResult.trim().replace(" ", "").replace("\n", "");
         String dirtyExpected = "{}";
         String expected = dirtyExpected.trim().replace(" ", "").replace("\n", "");
-        Assertions.assertEquals(expected, result);
+        assertEquals(expected, result);
     }
 
 
@@ -93,6 +95,6 @@ public class DifferTest {
                 + " -surname:Unmarried\n"
                 + " +surname:Married}";
         String expected = dirtyExpected.trim().replace(" ", "").replace("\n", "");
-        Assertions.assertEquals(expected, result);
+        assertEquals(expected, result);
     }
 }
