@@ -4,8 +4,9 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DifferTest {
 
@@ -42,7 +43,7 @@ public class DifferTest {
         String expectedMessage = "File 'D:\\devel\\java-project-71\\app\\src\\"
                 + "test\\resources\\NonExistFile1.json' does not exist";
         String actualMessage = exception.getMessage();
-        assertEquals(expectedMessage, actualMessage);
+        assertTrue(actualMessage.contains(expectedMessage));
 
     }
 
