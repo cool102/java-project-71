@@ -51,8 +51,8 @@ public class DifferTest {
      */
     @Test
     public void differTestWithDiffFiles() throws Exception {
-        String file1Name = "\\file1.json";
-        String file2Name = "\\file2.json";
+        String file1Name = "/file1.json";
+        String file2Name = "/file2.json";
         String dirtyResult = Differ.generate(absolutePath + file1Name, absolutePath + file2Name);
         String result = dirtyResult.trim().replace(" ", "").replace("\n", "");
         String dirtyExpected = "{age:21\n"
