@@ -40,10 +40,8 @@ public class DifferTest {
             Differ.generate(absolutePath + file1Name,
                     absolutePath + file2Name);
         });
-        String expectedMessage = "File 'D:\\devel\\java-project-71\\app\\src\\"
-                + "test\\resources\\NonExistFile1.json' does not exist";
         String actualMessage = exception.getMessage();
-        assertTrue(actualMessage.contains(expectedMessage));
+        assertTrue(actualMessage.contains("does not exist"));
 
     }
 
