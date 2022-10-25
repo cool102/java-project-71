@@ -29,21 +29,17 @@ public class App implements Callable<Integer> {
     public static void main(String[] args) {
         int exitCode = new CommandLine(new App()).execute(args);
         System.exit(exitCode);
-        System.out.println("Hello World!4");
+        System.out.println("Hello World!");
     }
 
+    /**
+     * @return
+     * @throws Exception
+     */
     @Override
-    public Integer call() throws Exception { // your business logic goes here...
-        //Path fp1 = Paths.get(filepath1);
-        //Path fp2 = Paths.get(filepath2);
-//
-
+    public Integer call() throws Exception {
         String res = Differ.generate(filepath1, filepath2);
         System.out.println(res);
-
-        // byte[] fileContents = Files.readAllBytes(file.toPath());
-        // byte[] digest = MessageDigest.getInstance(algorithm).digest(fileContents);
-        // System.out.printf(algorithm + " hash of " + file.getPath() + ": %0" + (digest.length*2) + "x%n", new BigInteger(1, digest));
         return 0;
     }
 

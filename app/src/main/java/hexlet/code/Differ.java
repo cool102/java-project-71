@@ -57,7 +57,9 @@ public class Differ {
                     result.append("   " + key + ": ");
                     result.append(value1 + "\n");
                 }
-                if (!Objects.equals(value2, value1) & Objects.nonNull(value1) & Objects.nonNull(value2)) { // добавляем изменения
+                if (!Objects.equals(value2, value1)
+                        & Objects.nonNull(value1)
+                        & Objects.nonNull(value2)) { // добавляем изменения
                     result.append(" - " + key + ": ");
                     result.append(value1 + "\n");
                     result.append(" - " + key + ": ");
