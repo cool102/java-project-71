@@ -36,3 +36,7 @@ compileJava {
     targetCompatibility = 11
     options.compilerArgs += ["-Aproject=${project.group}/${project.name}"]
 }
+
+checkstyle {
+    toolVersion '9.2.1'
+}
