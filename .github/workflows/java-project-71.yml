@@ -19,4 +19,5 @@ jobs:
         with:
           gradle-version: 7.4
           arguments: build
+          build-root-directory: app
 
