@@ -34,8 +34,8 @@ public class DifferTest {
      */
     @Test
     public void differTestFilesNotExist() throws Exception {
-        String file1Name = "\\NonExistFile1.json";
-        String file2Name = "\\NonExistFile2.json";
+        String file1Name = "/NonExistFile1.json";
+        String file2Name = "/NonExistFile2.json";
         Exception exception = assertThrows(Exception.class, () -> {
             Differ.generate(absolutePath + file1Name,
                     absolutePath + file2Name);
@@ -71,8 +71,8 @@ public class DifferTest {
      */
     @Test
     public void differTestWithEmptyFiles() throws Exception {
-        String file1Name = "\\file111.json";
-        String file2Name = "\\file222.json";
+        String file1Name = "/file111.json";
+        String file2Name = "/file222.json";
         String dirtyResult = Differ.generate(absolutePath + file1Name, absolutePath + file2Name);
         String result = dirtyResult.trim().replace(" ", "").replace("\n", "");
         String dirtyExpected = "{}";
