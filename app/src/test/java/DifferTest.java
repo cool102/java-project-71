@@ -121,4 +121,6 @@ public class DifferTest {
         ObjectMapper yamlMapper = Parser.getParser("");
         assertTrue(yamlMapper instanceof YAMLMapper);
     }
+
+
 }

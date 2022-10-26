@@ -1,8 +1,5 @@
 package hexlet.code;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -89,11 +86,6 @@ public class Differ {
 
     private static String getContent(Path path) throws IOException {
         return Files.readString(path);
-    }
-
-    private static Map getData(String content) throws JsonProcessingException {
-        ObjectMapper mapper = new ObjectMapper();
-        return mapper.readValue(content, Map.class);
     }
 
 
