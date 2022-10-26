@@ -7,5 +7,8 @@
 <a href="https://codeclimate.com/github/cool102/java-project-71/test_coverage"><img src="https://api.codeclimate.com/v1/badges/9f0fd848f932ede467e4/test_coverage" /></a>
 
 
-# Пример работы программы
+# Пример работы программы c JSON файлами
 https://asciinema.org/a/AnwNrxBuhzpVhPdheeEVDRTPq
+
+# Пример работы программы c YAML файлами
+https://asciinema.org/a/Bec1nBDrdOlYvQ7IUYVa9EBLa
