@@ -20,7 +20,7 @@ jobs:
           gradle-version: 7.4
           arguments: build
           build-root-directory: app
-      - name: send report to Codeclimate
+      - name: send report to CodeClimate
         uses: paambaati/codeclimate-action@v3.2.0
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
