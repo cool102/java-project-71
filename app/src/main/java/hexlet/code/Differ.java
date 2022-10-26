@@ -38,8 +38,8 @@ public class Differ {
         String content2 = getContent(writeFilePath2);
 
         // сохраняю спарсенное в Мапу
-        Map map1 = getData(content1);
-        Map map2 = getData(content2);
+        Map map1 = Parser.parse(content1);
+        Map map2 = Parser.parse(content2);
 
 
         //Map<String, Object> result = new TreeMap<>();

@@ -10,11 +10,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DifferTest {
 
-
     public static String getAbsolutePath() {
         return absolutePath;
     }
-
     private static String absolutePath;
 
     /**
@@ -50,7 +48,7 @@ public class DifferTest {
      * @throws Exception
      */
     @Test
-    public void differTestWithDiffFiles() throws Exception {
+    public void differTwoJsonFilesTest() throws Exception {
         String file1Name = "/file1.json";
         String file2Name = "/file2.json";
         String dirtyResult = Differ.generate(absolutePath + file1Name, absolutePath + file2Name);
@@ -86,6 +84,22 @@ public class DifferTest {
         String relativePathFile1 = "src/test/resources/file1.json";
         String relativePathFile2 = "src/test/resources/file2.json";
         String dirtyResult = Differ.generate(relativePathFile1, relativePathFile2);
+        String result = dirtyResult.trim().replace(" ", "").replace("\n", "");
+        String dirtyExpected = "{age:21\n"
+                + " +child:true\n"
+                + " name:Aigul\n"
+                + " -pet:cat\n"
+                + " -surname:Unmarried\n"
+                + " +surname:Married}";
+        String expected = dirtyExpected.trim().replace(" ", "").replace("\n", "");
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void differTwoYamlFilesTest() throws Exception {
+        String file1Name = "/file1.yml";
+        String file2Name = "/file2.yml";
+        String dirtyResult = Differ.generate(absolutePath + file1Name, absolutePath + file2Name);
         String result = dirtyResult.trim().replace(" ", "").replace("\n", "");
         String dirtyExpected = "{age:21\n"
                 + " +child:true\n"
