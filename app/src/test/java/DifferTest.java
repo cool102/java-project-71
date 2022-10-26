@@ -1,18 +1,20 @@
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
 import hexlet.code.Differ;
+import hexlet.code.Parser;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class DifferTest {
 
     public static String getAbsolutePath() {
         return absolutePath;
     }
+
     private static String absolutePath;
 
     /**
@@ -27,7 +29,6 @@ public class DifferTest {
     }
 
     /**
-     *
      * @throws Exception
      */
     @Test
@@ -64,7 +65,6 @@ public class DifferTest {
     }
 
     /**
-     *
      * @throws Exception
      */
     @Test
@@ -109,5 +109,14 @@ public class DifferTest {
                 + " +surname:Married}";
         String expected = dirtyExpected.trim().replace(" ", "").replace("\n", "");
         assertEquals(expected, result);
+    }
+
+    @Test
+    public void parserClassTest() {
+        ObjectMapper jsonMapper = Parser.getParser("{");
+        assertTrue(jsonMapper instanceof ObjectMapper);
+
+        ObjectMapper yamlMapper = Parser.getParser("");
+        assertTrue(yamlMapper instanceof YAMLMapper);
     }
 }

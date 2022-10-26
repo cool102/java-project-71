@@ -13,7 +13,7 @@ public class Parser {
         return mapper.readValue(content, Map.class);
     }
 
-    private static ObjectMapper getParser(String content) {
+    public static ObjectMapper getParser(String content) {
         if (content.contains("{")) {
             return new ObjectMapper();
         } else {
