@@ -3,4 +3,4 @@ run-dist:
 start:
 	./build/install/app/bin/app
 report:
-	make -C app ./gradlew jacocoTestReport
+	./gradlew jacocoTestReport
