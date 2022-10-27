@@ -12,3 +12,9 @@ https://asciinema.org/a/AnwNrxBuhzpVhPdheeEVDRTPq
 
 # Пример работы программы c YAML файлами
 https://asciinema.org/a/Bec1nBDrdOlYvQ7IUYVa9EBLa
+
+# Пример работы программы с не плоскими YAML файлами
+https://asciinema.org/a/5egOVuS4dlo5RTHsjMFzjBjuf
+
+# Пример работы программы с не плоскими JSON файлами
+https://asciinema.org/a/PK4xZk7fGdnkiFAjpH1CnmYBL

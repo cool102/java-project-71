@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
@@ -13,7 +14,7 @@ import java.util.TreeSet;
  *
  */
 public class Differ {
-    public static String generate(String filePath1, String filePath2) throws Exception {
+    public static Map<String, Object> generate(String filePath1, String filePath2) throws Exception {
 
         Path writeFilePath1 = Paths.get(filePath1);
         Path writeFilePath2 = Paths.get(filePath2);
@@ -50,37 +51,56 @@ public class Differ {
         allKeys.addAll(keys2);
 
         StringBuilder result = new StringBuilder("{\n");
+        Map<String, Object> resultMap = new LinkedHashMap();
         for (String key : allKeys) {
-            if (map2.containsKey(key)) {
+            boolean keyInResultMap = map2.containsKey(key);
+            if (keyInResultMap) {  //  либо ключ был и в 1 и во 2 мапе
+                // либо он появился во 2 мапе и его не было в первой мапе
+
                 Object value2 = map2.get(key);
                 Object value1 = map1.get(key);
 
-                if (Objects.equals(value2, value1)) {  // добавляем без знаков
+                boolean valuesIsEqual = Objects.equals(value2, value1);
+                boolean map1ContainsThisKey = keys1.contains(key);
+                boolean map2ContainsThisKey = keys2.contains(key);
+                if (valuesIsEqual & map1ContainsThisKey & map2ContainsThisKey) {
+                    // ключ и там и тут - добавляем без знаков
                     result.append("   " + key + ": ");
                     result.append(value1 + "\n");
+                    resultMap.put("  " + key + ":", value1);
                 }
-                if (!Objects.equals(value2, value1)
-                        & Objects.nonNull(value1)
-                        & Objects.nonNull(value2)) { // добавляем изменения
-                    result.append(" - " + key + ": ");
+                boolean valuesAreNotEqual = !Objects.equals(value2, value1);
+                if (valuesAreNotEqual & map1ContainsThisKey & map2ContainsThisKey) {
+                    // ключ и там и тут - добавляем изменения
+                    result.append("- " + key + ": ");
                     result.append(value1 + "\n");
-                    result.append(" + " + key + ": ");
+                    resultMap.put("- " + key + ": ", value1);
+                    result.append("+ " + key + ": ");
                     result.append(value2 + "\n");
+                    resultMap.put("+ " + key + ": ", value2);
                 }
             }
-            if (!map2.containsKey(key)) { // добавляем удаленные
+            boolean keyWasNotInResultMap = !map2.containsKey(key);
+            boolean map1ContainsThisKey = keys1.contains(key);
+            if (keyWasNotInResultMap & map1ContainsThisKey) {
+                // ключа нет тут, но был там - добавляем удаленные
                 Object value1 = map1.get(key);
-                result.append(" - " + key + ": ");
+                result.append("- " + key + ": ");
                 result.append(value1 + "\n");
+                resultMap.put("- " + key + ": ", value1);
             }
-            if (!map1.containsKey(key)) { // добавляем новое
+            boolean keyWasNotInFirstMap = !map1.containsKey(key);
+            if (keyWasNotInFirstMap & keyInResultMap) {
+                // ключа тут, но было там - добавляем новое
                 Object value2 = map2.get(key);
-                result.append(" + " + key + ": ");
+                result.append("+ " + key + ": ");
                 result.append(value2 + "\n");
+                resultMap.put("+ " + key + ": ", value2);
             }
         }
         result.append("}");
-        return result.toString();
+        //return result.toString();
+        return resultMap;
     }
 
 
