@@ -11,7 +11,6 @@ public class JsonFormatter {
     public static String format(Map<String, Object> map) throws JsonProcessingException {
         String jsonResult = mapper.writerWithDefaultPrettyPrinter()
                 .writeValueAsString(map);
-
         return jsonResult;
 
     }
