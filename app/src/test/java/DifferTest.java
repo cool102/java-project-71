@@ -44,8 +44,8 @@ public class DifferTest {
         String file1Name = "/file01.json";
         String file2Name = "/file02.json";
         String format = "json";
-        String fullPath1 = absolutePath +file1Name;
-        String fullPath2 = absolutePath +file2Name;
+        String fullPath1 = absolutePath + file1Name;
+        String fullPath2 = absolutePath + file2Name;
         String json = Differ.generate(fullPath1, fullPath2, format);
         JsonNode jsonNode = mapper.readTree(json);
         int actual = jsonNode.get("- id").asInt();
@@ -86,8 +86,8 @@ public class DifferTest {
         String file1Name = "/NonExistFile1.json";
         String file2Name = "/NonExistFile2.json";
         String format = "stylish";
-        String fullPath1 = absolutePath +file1Name;
-        String fullPath2 = absolutePath +file2Name;
+        String fullPath1 = absolutePath + file1Name;
+        String fullPath2 = absolutePath + file2Name;
         Exception exception = assertThrows(Exception.class, () -> {
             Differ.generate(fullPath1,
                     fullPath2, format);
@@ -105,8 +105,8 @@ public class DifferTest {
         String file1Name = "/file01.yml";
         String file2Name = "/file02.yml";
         String format = "stylish";
-        String fullPath1 = absolutePath +file1Name;
-        String fullPath2 = absolutePath +file2Name;
+        String fullPath1 = absolutePath + file1Name;
+        String fullPath2 = absolutePath + file2Name;
         String dirtyResult = Differ.generate(fullPath1, fullPath2, format);
         String result = dirtyResult.trim().replace(" ", "").replace("\n", "");
         String dirtyExpected = "{\n"
@@ -146,8 +146,8 @@ public class DifferTest {
         String file1Name = "/file01.json";
         String file2Name = "/file02.json";
         String format = "stylish";
-        String fullPath1 = absolutePath +file1Name;
-        String fullPath2 = absolutePath +file2Name;
+        String fullPath1 = absolutePath + file1Name;
+        String fullPath2 = absolutePath + file2Name;
         String dirtyResult = Differ.generate(fullPath1, fullPath2, format);
         String result = dirtyResult.trim().replace(" ", "").replace("\n", "");
         String dirtyExpected = "{\n"
@@ -187,8 +187,8 @@ public class DifferTest {
         String file1Name = "/file111.json";
         String file2Name = "/file222.json";
         String format = "stylish";
-        String fullPath1 = absolutePath +file1Name;
-        String fullPath2 = absolutePath +file2Name;
+        String fullPath1 = absolutePath + file1Name;
+        String fullPath2 = absolutePath + file2Name;
         String dirtyResult = Differ.generate(fullPath1, fullPath2, format);
         String result = dirtyResult.trim().replace(" ", "").replace("\n", "");
         String dirtyExpected = "{}";
