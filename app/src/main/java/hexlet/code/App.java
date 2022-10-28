@@ -6,14 +6,13 @@ import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
 
-import java.util.Map;
 import java.util.concurrent.Callable;
 
 @Command(name = "gendiff", mixinStandardHelpOptions = true, version = "gendiff 1.0",
         description = "Compares two files and shows a difference.")
 public class App implements Callable<Integer> {
     @Option(names = {"-f", "--format"}, description = "The format")
-    private String format = "stylish";
+    private String formatName = "plain";
     @Parameters(index = "0", description = "path to first file")
     private String filepath1;
 
@@ -32,8 +31,7 @@ public class App implements Callable<Integer> {
      */
     @Override
     public Integer call() throws Exception {
-        Map resultMap = Differ.generate(filepath1, filepath2);
-        String result = Formatter.format(resultMap, format);
+        String result = Differ.generate(filepath1, filepath2, formatName);
         System.out.println(result);
         return 0;
     }

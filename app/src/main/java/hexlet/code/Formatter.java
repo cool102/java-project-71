@@ -1,23 +1,20 @@
 package hexlet.code;
 
+import hexlet.code.formatters.plain.PlainFormatter;
+import hexlet.code.formatters.stylish.StylishFormatter;
+
 import java.util.Map;
 
 public class Formatter {
     public static String format(Map<String, Object> map, String format) {
-        StringBuilder result = new StringBuilder();
         if (format.equals("stylish")) {
-            result.append("{\n");
-            for (Map.Entry<String, Object> entry : map.entrySet()) {
-                String key = entry.getKey();
-                Object value = entry.getValue();
-                final int whitespaces = 4;
-                result.append(" ".repeat(whitespaces));
-                result.append(key);
-                result.append(value);
-                result.append("\n");
-            }
-            result.append("}");
+            return StylishFormatter.format(map);
         }
-        return result.toString();
+        if (format.equals("plain")) {
+            return PlainFormatter.format(map);
+        }
+        return null;
+
     }
 }
+

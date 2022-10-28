@@ -18,3 +18,6 @@ https://asciinema.org/a/5egOVuS4dlo5RTHsjMFzjBjuf
 
 # Пример работы программы с не плоскими JSON файлами
 https://asciinema.org/a/PK4xZk7fGdnkiFAjpH1CnmYBL
+
+# Пример работы программы c форматами stylish (вывод различий на консоль знаками + и - ) и plain (вывод различий объясняющим текстом) 
+https://asciinema.org/a/QsxMgcLslgtJvWEL6XpPzBwur

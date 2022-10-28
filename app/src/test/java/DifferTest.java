@@ -2,22 +2,25 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
 import hexlet.code.Differ;
 import hexlet.code.Parser;
+import hexlet.code.formatters.plain.PlainFormatter;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
-import java.util.Map;
+import java.util.Set;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class DifferTest {
 
+    private static String absolutePath;
+
     public static String getAbsolutePath() {
         return absolutePath;
     }
-
-    private static String absolutePath;
 
     /**
      *
@@ -30,6 +33,31 @@ public class DifferTest {
 
     }
 
+    @Test
+    public void isDoubleWithOutSignTest() {
+        Set<String> set = Set.of("chars1", "- chars2", "  chars2 ", "    - checked ", " "
+                        + "     checked ", "    - default ",
+                "      default ", "    - id: ", "      id:  ", "    - key1: ",
+                "      key2 ", "      numbers1: ", "    - numbers2:  ", "      "
+                +  "numbers2:  ", "    - numbers3:  ",
+                "      numbers4:  ", "      obj1: ", "    - setting1:  ",
+                "      setting1:  ",
+                "    - setting2:  ",
+                "      setting2:  ",
+                "    - setting3:  ",
+                "      setting3:  ");
+        boolean doubleWithOutSign = PlainFormatter.isDoubleWithOutSign(set, "- chars2");
+        Assertions.assertTrue(doubleWithOutSign);
+
+        boolean doubleWithOutSign3 = PlainFormatter.isDoubleWithOutSign(set, "+setting2");
+        Assertions.assertTrue(doubleWithOutSign3);
+
+        boolean doubleWithOutSign1 = PlainFormatter.isDoubleWithOutSign(set, "- chars1");
+        Assertions.assertFalse(doubleWithOutSign1);
+
+
+    }
+
     /**
      * @throws Exception
      */
@@ -37,9 +65,10 @@ public class DifferTest {
     public void differTestFilesNotExist() throws Exception {
         String file1Name = "/NonExistFile1.json";
         String file2Name = "/NonExistFile2.json";
+        String format = "stylish";
         Exception exception = assertThrows(Exception.class, () -> {
             Differ.generate(absolutePath + file1Name,
-                    absolutePath + file2Name);
+                    absolutePath + file2Name, format);
         });
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains("does not exist"));
@@ -53,8 +82,9 @@ public class DifferTest {
     public void differNonFlatYamlFilesTest() throws Exception {
         String file1Name = "/file01.yml";
         String file2Name = "/file02.yml";
-        Map dirtyResult = Differ.generate(absolutePath + file1Name, absolutePath + file2Name);
-        // String result = dirtyResult.trim().replace(" ", "").replace("\n", "");
+        String format = "stylish";
+        String dirtyResult = Differ.generate(absolutePath + file1Name, absolutePath + file2Name, format);
+        String result = dirtyResult.trim().replace(" ", "").replace("\n", "");
         String dirtyExpected = "{\n"
                 + "    chars1: [a, b, c]\n"
                 + "  - chars2: [d, e, f]\n"
@@ -81,7 +111,7 @@ public class DifferTest {
                 + "  + setting3: none\n"
                 + "}";
         String expected = dirtyExpected.trim().replace(" ", "").replace("\n", "");
-        // assertEquals(expected, result);
+        assertEquals(expected, result);
     }
 
     /**
@@ -91,8 +121,9 @@ public class DifferTest {
     public void differNonFlatJsonFilesTest() throws Exception {
         String file1Name = "/file01.json";
         String file2Name = "/file02.json";
-        Map dirtyResult = Differ.generate(absolutePath + file1Name, absolutePath + file2Name);
-        //String result = dirtyResult.trim().replace(" ", "").replace("\n", "");
+        String format = "stylish";
+        String dirtyResult = Differ.generate(absolutePath + file1Name, absolutePath + file2Name, format);
+        String result = dirtyResult.trim().replace(" ", "").replace("\n", "");
         String dirtyExpected = "{\n"
                 + "    chars1: [a, b, c]\n"
                 + "  - chars2: [d, e, f]\n"
@@ -119,7 +150,7 @@ public class DifferTest {
                 + "  + setting3: none\n"
                 + "}";
         String expected = dirtyExpected.trim().replace(" ", "").replace("\n", "");
-        // assertEquals(expected, result);
+        assertEquals(expected, result);
     }
 
     ///**
@@ -148,11 +179,12 @@ public class DifferTest {
     public void differTestWithEmptyFiles() throws Exception {
         String file1Name = "/file111.json";
         String file2Name = "/file222.json";
-        Map dirtyResult = Differ.generate(absolutePath + file1Name, absolutePath + file2Name);
-        // String result = dirtyResult.trim().replace(" ", "").replace("\n", "");
+        String format = "stylish";
+        String dirtyResult = Differ.generate(absolutePath + file1Name, absolutePath + file2Name, format);
+        String result = dirtyResult.trim().replace(" ", "").replace("\n", "");
         String dirtyExpected = "{}";
         String expected = dirtyExpected.trim().replace(" ", "").replace("\n", "");
-        // assertEquals(expected, result);
+        assertEquals(expected, result);
     }
 
 
@@ -160,8 +192,9 @@ public class DifferTest {
     public void relativePathTest() throws Exception {
         String relativePathFile1 = "src/test/resources/file1.json";
         String relativePathFile2 = "src/test/resources/file2.json";
-        Map dirtyResult = Differ.generate(relativePathFile1, relativePathFile2);
-        // String result = dirtyResult.trim().replace(" ", "").replace("\n", "");
+        String format = "stylish";
+        String dirtyResult = Differ.generate(relativePathFile1, relativePathFile2, format);
+        String result = dirtyResult.trim().replace(" ", "").replace("\n", "");
         String dirtyExpected = "{age:21\n"
                 + " +child:true\n"
                 + " name:Aigul\n"
@@ -169,7 +202,7 @@ public class DifferTest {
                 + " -surname:Unmarried\n"
                 + " +surname:Married}";
         String expected = dirtyExpected.trim().replace(" ", "").replace("\n", "");
-        //assertEquals(expected, result);
+        assertEquals(expected, result);
     }
 
     // @Test
