@@ -13,6 +13,7 @@ public class StylishFormatter {
             final int whitespaces = 4;
             result.append(" ".repeat(whitespaces));
             result.append(key);
+            result.append(":");
             result.append(value);
             result.append("\n");
         }

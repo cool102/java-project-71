@@ -50,7 +50,7 @@ public class Differ {
         allKeys.addAll(keys1);
         allKeys.addAll(keys2);
 
-        StringBuilder result = new StringBuilder("{\n");
+
         Map<String, Object> resultMap = new LinkedHashMap();
         for (String key : allKeys) {
             boolean keyInResultMap = map2.containsKey(key);
@@ -65,19 +65,16 @@ public class Differ {
                 boolean map2ContainsThisKey = keys2.contains(key);
                 if (valuesIsEqual & map1ContainsThisKey & map2ContainsThisKey) {
                     // ключ и там и тут - добавляем без знаков
-                    result.append("   " + key + ": ");
-                    result.append(value1 + "\n");
-                    resultMap.put("  " + key + ":", value1);
+
+                    resultMap.put("  " + key, value1);
                 }
                 boolean valuesAreNotEqual = !Objects.equals(value2, value1);
                 if (valuesAreNotEqual & map1ContainsThisKey & map2ContainsThisKey) {
                     // ключ и там и тут - добавляем изменения
-                    result.append("- " + key + ":");
-                    result.append(value1 + "\n");
-                    resultMap.put("- " + key + ":", value1);
-                    result.append("+ " + key + ": ");
-                    result.append(value2 + "\n");
-                    resultMap.put("+ " + key + ":", value2);
+
+                    resultMap.put("- " + key, value1);
+
+                    resultMap.put("+ " + key, value2);
                 }
             }
             boolean keyWasNotInResultMap = !map2.containsKey(key);
@@ -85,20 +82,17 @@ public class Differ {
             if (keyWasNotInResultMap & map1ContainsThisKey) {
                 // ключа нет тут, но был там - добавляем удаленные
                 Object value1 = map1.get(key);
-                result.append("- " + key + ":");
-                result.append(value1 + "\n");
-                resultMap.put("- " + key + ":", value1);
+
+                resultMap.put("- " + key, value1);
             }
             boolean keyWasNotInFirstMap = !map1.containsKey(key);
             if (keyWasNotInFirstMap & keyInResultMap) {
                 // ключа тут, но было там - добавляем новое
                 Object value2 = map2.get(key);
-                result.append("+ " + key + ":");
-                result.append(value2 + "\n");
-                resultMap.put("+ " + key + ":", value2);
+
+                resultMap.put("+ " + key, value2);
             }
         }
-        result.append("}");
 
         return Formatter.format(resultMap, formatName);
 

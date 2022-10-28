@@ -12,7 +12,7 @@ import java.util.concurrent.Callable;
         description = "Compares two files and shows a difference.")
 public class App implements Callable<Integer> {
     @Option(names = {"-f", "--format"}, description = "The format")
-    private String formatName = "plain";
+    private String formatName = "stylish";
     @Parameters(index = "0", description = "path to first file")
     private String filepath1;
 

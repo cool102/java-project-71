@@ -21,3 +21,6 @@ https://asciinema.org/a/PK4xZk7fGdnkiFAjpH1CnmYBL
 
 # Пример работы программы c форматами stylish (вывод различий на консоль знаками + и - ) и plain (вывод различий объясняющим текстом) 
 https://asciinema.org/a/QsxMgcLslgtJvWEL6XpPzBwur
+
+# Пример работы программы c форматами json, stylish (вывод различий на консоль знаками + и - ) и plain (вывод различий объясняющим текстом)
+https://asciinema.org/a/5Hos8z8jPZ3O80WsD5cl5TNyY

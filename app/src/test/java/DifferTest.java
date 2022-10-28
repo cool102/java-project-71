@@ -1,3 +1,4 @@
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
 import hexlet.code.Differ;
@@ -17,6 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class DifferTest {
 
     private static String absolutePath;
+    private static ObjectMapper mapper;
 
     public static String getAbsolutePath() {
         return absolutePath;
@@ -30,7 +32,23 @@ public class DifferTest {
         String path = "src/test/resources";
         File file = new File(path);
         absolutePath = file.getAbsolutePath();
+        mapper = new ObjectMapper();
 
+    }
+
+    /**
+     * @throws Exception
+     */
+    @Test
+    public void jsonFormatterTestTest() throws Exception {
+        String file1Name = "/file01.json";
+        String file2Name = "/file02.json";
+        String format = "json";
+        String json = Differ.generate(absolutePath + file1Name, absolutePath + file2Name, format);
+        JsonNode jsonNode = mapper.readTree(json);
+        int actual = jsonNode.get("- id").asInt();
+        final int expected = 45;
+        Assertions.assertEquals(actual, expected);
     }
 
     @Test
@@ -39,7 +57,7 @@ public class DifferTest {
                         + "     checked ", "    - default ",
                 "      default ", "    - id: ", "      id:  ", "    - key1: ",
                 "      key2 ", "      numbers1: ", "    - numbers2:  ", "      "
-                +  "numbers2:  ", "    - numbers3:  ",
+                        + "numbers2:  ", "    - numbers3:  ",
                 "      numbers4:  ", "      obj1: ", "    - setting1:  ",
                 "      setting1:  ",
                 "    - setting2:  ",
@@ -153,25 +171,6 @@ public class DifferTest {
         assertEquals(expected, result);
     }
 
-    ///**
-    // * @throws Exception
-    // */
-    //@Test
-    //public void differTwoJsonFilesTest() throws Exception {
-    //    String file1Name = "/file1.json";
-    //    String file2Name = "/file2.json";
-    //    String dirtyResult = Differ.generate(absolutePath + file1Name, absolutePath + file2Name);
-    //    String result = dirtyResult.trim().replace(" ", "").replace("\n", "");
-    //    String dirtyExpected = "{age:21\n"
-    //            + " +child:true\n"
-    //            + " name:Aigul\n"
-    //            + " -pet:cat\n"
-    //            + " -surname:Unmarried\n"
-    //            + " +surname:Married}";
-    //    String expected = dirtyExpected.trim().replace(" ", "").replace("\n", "");
-    //    assertEquals(expected, result);
-    //}
-
     /**
      * @throws Exception
      */
@@ -205,22 +204,6 @@ public class DifferTest {
         assertEquals(expected, result);
     }
 
-    // @Test
-    // public void differTwoYamlFilesTest() throws Exception {
-    //     String file1Name = "/file1.yml";
-    //     String file2Name = "/file2.yml";
-    //     String dirtyResult = Differ.generate(absolutePath + file1Name, absolutePath + file2Name);
-    //     String result = dirtyResult.trim().replace(" ", "").replace("\n", "");
-    //     String dirtyExpected = "{age:21\n"
-    //             + " +child:true\n"
-    //             + " name:Aigul\n"
-    //             + " -pet:cat\n"
-    //             + " -surname:Unmarried\n"
-    //             + " +surname:Married}";
-    //     String expected = dirtyExpected.trim().replace(" ", "").replace("\n", "");
-    //     assertEquals(expected, result);
-    // }
-//
     @Test
     public void parserClassTest() {
         ObjectMapper jsonMapper = Parser.getParser("{");
