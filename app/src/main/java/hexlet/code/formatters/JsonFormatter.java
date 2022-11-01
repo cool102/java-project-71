@@ -8,7 +8,6 @@ import java.util.Map;
 
 public class JsonFormatter {
     private static ObjectMapper mapper = new ObjectMapper();
-
     public static String format(List<Map<String, Object>> differs) throws JsonProcessingException {
         String jsonResult = mapper.writerWithDefaultPrettyPrinter()
                 .writeValueAsString(differs);

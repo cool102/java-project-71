@@ -8,7 +8,6 @@ import java.util.Set;
 import java.util.TreeSet;
 
 public class PlainFormatter {
-
     public static String format(List<Map<String, Object>> differs) {
         StringBuilder sb = new StringBuilder();
         for (Map<String, Object> map : differs) {
@@ -24,9 +23,7 @@ public class PlainFormatter {
                                 || oldValue instanceof LinkedHashMap) {
                             oldValue = "[complex value]";
                         }
-
                     }
-
                     Object newValue = map.get("newValue");
                     if (newValue != null) {
                         if (newValue instanceof String) {
@@ -36,7 +33,6 @@ public class PlainFormatter {
                                 || newValue instanceof LinkedHashMap) {
                             newValue = "[complex value]";
                         }
-
                     }
                     sb.append("Property '" + map.get("key") + "' was " + differType + ". "
                             + "From " + oldValue + " to " + newValue + "\n");
@@ -54,9 +50,7 @@ public class PlainFormatter {
                                 || value instanceof LinkedHashMap) {
                             value = "[complex value]";
                         }
-
                     }
-
                     sb.append("Property '" + map.get("key") + "' was added with value: " + value + "\n");
                 case "unchanged":
                     break;

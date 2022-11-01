@@ -10,17 +10,16 @@ import java.util.Map;
 
 public class Formatter {
     public static String format(List<Map<String, Object>> differs, String format) throws JsonProcessingException {
-        if (format.equals("stylish")) {
-            return StylishFormatter.format(differs);
+        switch (format) {
+            case "json":
+                return JsonFormatter.format(differs);
+            case "plain":
+                return PlainFormatter.format(differs);
+            case "stylish":
+                return StylishFormatter.format(differs);
+            default:
+                throw new IllegalArgumentException("Unknown format: " + format);
         }
-        if (format.equals("plain")) {
-            return PlainFormatter.format(differs);
-        }
-        if (format.equals("json")) {
-            return JsonFormatter.format(differs);
-        }
-        return null;
-
     }
 }
 

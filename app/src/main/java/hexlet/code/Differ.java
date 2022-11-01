@@ -17,19 +17,16 @@ public final class Differ {
         List<Map<String, Object>> differ = buildDiffers(filePath1, filePath2);
         return Formatter.format(differ, format);
     }
-
     public static String generate(String filePath1, String filePath2) throws Exception {
         final String defaultFormat = "stylish";
         List<Map<String, Object>> differ = buildDiffers(filePath1, filePath2);
         return Formatter.format(differ, defaultFormat);
     }
-
     public static List<Map<String, Object>> buildDiffers(String filePath1, String filePath2) throws Exception {
         Path writeFilePath1 = Paths.get(filePath1);
         Path writeFilePath2 = Paths.get(filePath2);
         Path path1 = writeFilePath1.toAbsolutePath().normalize();
         Path path2 = writeFilePath2.toAbsolutePath().normalize();
-
         if (!Files.exists(path1)) {
             throw new Exception("File '" + path1 + "' does not exist");
         }
@@ -45,9 +42,7 @@ public final class Differ {
         Set<String> allKeys = new TreeSet<>();
         allKeys.addAll(keys1);
         allKeys.addAll(keys2);
-
         List<Map<String, Object>> differences = new ArrayList<>();
-
         for (String key : allKeys) {
             Map<String, Object> innerMap = new LinkedHashMap<>();
             if (map1.containsKey(key) && map2.containsKey(key)) {
@@ -81,11 +76,9 @@ public final class Differ {
         }
         return differences;
     }
-
     private static String getContent(Path path) throws IOException {
         return Files.readString(path);
     }
-
 }
 
 

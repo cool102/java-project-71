@@ -11,7 +11,6 @@ public class Parser {
         ObjectMapper mapper = Parser.getParser(filePath);
         return mapper.readValue(content, Map.class);
     }
-
     public static ObjectMapper getParser(String filePath) {
         if (filePath.endsWith(".json")) {
             return new ObjectMapper();
