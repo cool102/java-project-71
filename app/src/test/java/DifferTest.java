@@ -64,7 +64,7 @@ public class DifferTest {
         Path normalizePathToExpected = pathToExpected.toAbsolutePath().normalize();
         String expectedContent = Files.readString(normalizePathToExpected);
 
-        assertEquals(expectedContent, result);
+        assertEquals(expectedContent.replace("\r", ""), result);
 
     }
 
@@ -116,7 +116,7 @@ public class DifferTest {
         Path normalizePathToExpected = pathToExpected.toAbsolutePath().normalize();
         String expectedContent = Files.readString(normalizePathToExpected);
 
-        assertEquals(expectedContent, result);
+        assertEquals(expectedContent.replace("\r", ""), result);
 
     }
 
@@ -170,7 +170,7 @@ public class DifferTest {
         Path normalizePathToExpected = pathToExpected.toAbsolutePath().normalize();
         String expectedContent = Files.readString(normalizePathToExpected);
 
-        assertEquals(expectedContent, result);
+        assertEquals(expectedContent.replace("\r", ""), result);
     }
 
     @Test

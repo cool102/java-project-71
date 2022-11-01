@@ -44,9 +44,9 @@ application {
     mainClass = 'hexlet.code.App'
 }
 compileJava {
-    options.release = 17
-    sourceCompatibility = 17
-    targetCompatibility = 17
+    options.release = 11
+    sourceCompatibility = 11
+    targetCompatibility = 11
     options.compilerArgs += ["-Aproject=${project.group}/${project.name}"]
 }
 
