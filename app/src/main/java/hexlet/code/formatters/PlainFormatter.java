@@ -15,25 +15,9 @@ public class PlainFormatter {
             switch ((String) differType) {
                 case "updated":
                     Object oldValue = map.get("oldValue");
-                    if (oldValue != null) {
-                        if (oldValue instanceof String) {
-                            oldValue = "'" + oldValue + "'";
-                        }
-                        if (oldValue.getClass().isArray() || oldValue instanceof ArrayList
-                                || oldValue instanceof LinkedHashMap) {
-                            oldValue = "[complex value]";
-                        }
-                    }
+                    oldValue = makeDecision(oldValue);
                     Object newValue = map.get("newValue");
-                    if (newValue != null) {
-                        if (newValue instanceof String) {
-                            newValue = "'" + newValue + "'";
-                        }
-                        if (newValue.getClass().isArray() || newValue instanceof ArrayList
-                                || newValue instanceof LinkedHashMap) {
-                            newValue = "[complex value]";
-                        }
-                    }
+                    newValue = makeDecision(newValue);
                     sb.append("Property '" + map.get("key") + "' was " + differType + ". "
                             + "From " + oldValue + " to " + newValue + "\n");
                     break;
@@ -42,15 +26,7 @@ public class PlainFormatter {
                     break;
                 case "added":
                     Object value = map.get("value");
-                    if (value != null) {
-                        if (value instanceof String) {
-                            value = "'" + value + "'";
-                        }
-                        if (value.getClass().isArray() || value instanceof ArrayList
-                                || value instanceof LinkedHashMap) {
-                            value = "[complex value]";
-                        }
-                    }
+                    value = makeDecision(value);
                     sb.append("Property '" + map.get("key") + "' was added with value: " + value + "\n");
                 case "unchanged":
                     break;
@@ -59,16 +35,24 @@ public class PlainFormatter {
             }
 
         }
-
         Set<String> resultLines = new TreeSet<>();
-        sb.toString().
-
-                lines().
-
-                forEach(resultLines::add);
+        sb.toString().lines().forEach(resultLines::add);
         return String.join("\n", resultLines);
 
 
+    }
+
+    private static Object makeDecision(Object oldValue) {
+        if (oldValue != null) {
+            if (oldValue instanceof String) {
+                oldValue = "'" + oldValue + "'";
+            }
+            if (oldValue.getClass().isArray() || oldValue instanceof ArrayList
+                    || oldValue instanceof LinkedHashMap) {
+                oldValue = "[complex value]";
+            }
+        }
+        return oldValue;
     }
 }
 
