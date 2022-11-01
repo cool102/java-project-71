@@ -9,8 +9,8 @@ public class StylishFormatter {
 
         result.append("{\n");
         for (Map<String, Object> map : differs) {
-            final int whitespaces = 4;
-            final int whitespacesForUnchanged = 6;
+            final int whitespaces = 2;
+            final int whitespacesForUnchanged = 4;
             Object differType = map.get("differType");
             switch ((String) differType) {
                 case "unchanged":
