@@ -6,21 +6,9 @@
 
 <a href="https://codeclimate.com/github/cool102/java-project-71/test_coverage"><img src="https://api.codeclimate.com/v1/badges/9f0fd848f932ede467e4/test_coverage" /></a>
 
+# Пример работы программы с YML файлами c форматами stylish, plain и json
+[![asciicast](https://asciinema.org/a/hdOnqwbuUMSW0HqM7CmWP5Wy0.svg)](https://asciinema.org/a/hdOnqwbuUMSW0HqM7CmWP5Wy0)
 
-# Пример работы программы c JSON файлами
-https://asciinema.org/a/AnwNrxBuhzpVhPdheeEVDRTPq
+# Пример работы программы с JSON файлами c форматами stylish, plain и json
+[![asciicast](https://asciinema.org/a/xX8K955vnc1WXi8lx16VLdbE4.svg)](https://asciinema.org/a/xX8K955vnc1WXi8lx16VLdbE4)
 
-# Пример работы программы c YAML файлами
-https://asciinema.org/a/Bec1nBDrdOlYvQ7IUYVa9EBLa
-
-# Пример работы программы с не плоскими YAML файлами
-https://asciinema.org/a/5egOVuS4dlo5RTHsjMFzjBjuf
-
-# Пример работы программы с не плоскими JSON файлами
-https://asciinema.org/a/PK4xZk7fGdnkiFAjpH1CnmYBL
-
-# Пример работы программы c форматами stylish (вывод различий на консоль знаками + и - ) и plain (вывод различий объясняющим текстом) 
-https://asciinema.org/a/QsxMgcLslgtJvWEL6XpPzBwur
-
-# Пример работы программы c форматами json, stylish (вывод различий на консоль знаками + и - ) и plain (вывод различий объясняющим текстом)
-https://asciinema.org/a/5Hos8z8jPZ3O80WsD5cl5TNyY
